@@ -1,9 +1,16 @@
 import axios from 'axios';
 
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8000/api';
+const DEFAULT_API_BASE_URL = 'https://analytics-backend-3f79.onrender.com/api';
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || DEFAULT_API_BASE_URL;
 const API_TIMEOUT = parseInt(process.env.REACT_APP_API_TIMEOUT) || 10000;
 const TOKEN_KEY = process.env.REACT_APP_JWT_TOKEN_KEY || 'access_token';
 const REFRESH_TOKEN_KEY = process.env.REACT_APP_REFRESH_TOKEN_KEY || 'refresh_token';
+
+if (!process.env.REACT_APP_API_BASE_URL) {
+  console.warn(
+    `[API] REACT_APP_API_BASE_URL is not set. Using fallback: ${API_BASE_URL}`
+  );
+}
 
 /**
  * Create Axios instance with default config
