@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
-import { FiFilter, FiX, FiRefreshCw } from 'react-icons/fi';
+import React from 'react';
+import { FiFilter, FiRefreshCw } from 'react-icons/fi';
 import { useFilters } from '../../hooks/useFilters';
 import { trackingAPI } from '../../services/api';
 
 export const Filters = ({ onFiltersChange }) => {
   const { filters, updateFilter, updateDateRange, resetFilters } = useFilters();
-  const [loading, setLoading] = useState(false);
 
   const handleDateChange = (e, dateType) => {
     const newDate = e.target.value;

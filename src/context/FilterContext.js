@@ -70,6 +70,20 @@ export const FilterProvider = ({ children }) => {
     });
   }, []);
 
+  const setFiltersState = useCallback((newFilters) => {
+    setFilters((prev) => {
+      const updated = { ...prev, ...newFilters };
+      Object.entries(newFilters).forEach(([key, value]) => {
+        if (value === null || value === '') {
+          Cookies.remove(key, { path: '/' });
+        } else {
+          Cookies.set(key, value, COOKIE_OPTIONS);
+        }
+      });
+      return updated;
+    });
+  }, []);
+
   const value = {
     filters,
     selectedFeature,
@@ -77,6 +91,7 @@ export const FilterProvider = ({ children }) => {
     updateDateRange,
     resetFilters,
     setSelectedFeature,
+    setFiltersState,
   };
 
   return (
